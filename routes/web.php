@@ -1,5 +1,5 @@
 <?php
-
+$version='v1';
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,7 +10,11 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+$router->group(['prefix' => 'public/api/'.$version],function() use($router,$version){
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+    $router->group(['prefix' => 'role'],function() use($router,$version){
+
+        $router->get('/check',$version.'\RoleController@index');
+    });
+
 });
